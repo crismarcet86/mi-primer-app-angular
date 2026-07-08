@@ -1,0 +1,11 @@
+<div class="mi-tarjeta" [ngClass]="{ 'abierto': estado() === 'abierto', 'cerrado': estado() === 'cerrado' }">
+  <div class="contenido-tarjeta">
+    @if (estado() === 'abierto') {
+      <li>🔴 {{ titulo() }} — {{ estado() }}</li>
+      <button (click)="onCerrarClick(id())">Cerrar Ticket</button>
+    } @else {
+      <li>✅ {{ titulo() }} — {{ estado() }}</li>
+    }
+  </div>
+</div>
+<div><a [routerLink]="['/tickets', id()]">Ver detalle</a></div>

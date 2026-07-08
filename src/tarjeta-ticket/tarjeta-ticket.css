@@ -1,0 +1,25 @@
+/* Contenedor base de la tarjeta */
+.mi-tarjeta {
+  display: inline-block; /* Permite que el ancho se adapte al contenido */
+  transition: width 0.3s ease, max-width 0.3s ease; /* Animación suave */
+  overflow: hidden;
+  white-space: nowrap; /* Evita que el texto salte de línea al ampliarse */
+  border-radius: 4px;
+}
+
+/* Alinea el texto y el botón horizontalmente hacia la derecha */
+.contenido-tarjeta {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Separación entre el texto y el botón */
+}
+
+/* Estado Cerrado: Más angosto */
+.mi-tarjeta.cerrado {
+  max-width: 200px; 
+}
+
+/* Estado Abierto: Se amplía a la derecha para dar espacio al botón */
+.mi-tarjeta.abierto {
+  max-width: 500px; /* Ajusta este valor según el tamaño de tu botón */
+}
