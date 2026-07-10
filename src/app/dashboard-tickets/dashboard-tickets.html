@@ -1,0 +1,19 @@
+<main>
+    <div class="formGroup">
+    <p>Abiertos: {{ totalAbiertos() }} | Cerrados: {{ totalCerrados() }}</p>
+    <p>Existen Tickets Abiertos?:
+        @if (hayTicketsAbiertos()) { SI } @else { 🎉 No hay tickets pendientes }
+    </p>
+    <ul>
+        @for (ticket of ticketsMostrados(); track ticket.id) {
+        <app-tarjeta-ticket [id]="ticket.id" [titulo]="ticket.titulo" [estado]="ticket.estado"
+            (cerrar)="cambiarEstadoTicket($event)" />
+        }
+    </ul>
+    <button type="button" (click)="this.filtro.set('todos')">Mostrar Todos</button>
+    <button type="button" (click)="this.filtro.set('abierto')">Mostrar solo Abiertos</button>
+    <button type="button" (click)="this.filtro.set('cerrado')">Mostrar solo Cerrados</button>
+    <p>{{ contador() }}</p>
+    <button type="button" (click)="contador.update(v => v + 1)">+1</button>
+</div>
+</main>

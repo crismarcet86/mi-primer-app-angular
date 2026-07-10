@@ -1,0 +1,50 @@
+<form [formGroup]="usuarioForm" (ngSubmit)="onSubmit()">
+    <h1>REGISTRO USUARIO</h1>
+    <div class="formGroup">
+        <label class="form-label">Nombre </label>
+        <input formControlName="nombre" type="text" class="form-input"/>
+        @if (usuarioForm.get('nombre')?.invalid && usuarioForm.get('nombre')?.touched) {
+            <span class="error">
+                @if (usuarioForm.get('nombre')?.hasError('required')) {
+                    El Nombre es obligatorio.
+                } @if (usuarioForm.get('nombre')?.hasError('minlength')) {
+                    El Nombre debe tener al menos 3 caracteres.
+                }
+            </span>
+        }
+    </div>
+    <div class="formGroup">
+        <label class="form-label">Email </label>
+        <input formControlName="email"  type="email"/>
+        @if (usuarioForm.get('email')?.hasError('email')) {
+            El Email debe tener el formato correcto. Ej: ejemplo@info.com
+        }
+
+    </div>
+    <div class="formGroup">     
+        <label class="form-label">Contraseña </label>
+        <input formControlName="contrasenia"  type="password"/>
+        @if (usuarioForm.get('contrasenia')?.invalid && usuarioForm.get('contrasenia')?.touched) {
+            <span class="error">
+                @if (usuarioForm.get('contrasenia')?.hasError('required')) {
+                    La contraseña es obligatorio.
+                } @if (usuarioForm.get('contrasenia')?.hasError('minlength')) {
+                    La contraseña debe tener al menos 8 caracteres.
+                }
+            </span>
+        }
+    </div>
+    <div class="formGroup">
+        <div formArrayName="telefonos">
+            @for (telefono of telefonos.controls; track $index) {
+                <label class="form-label">Telefono </label>
+                <input [formControlName]="$index" />
+                <button type="button" (click)="quitarTelefono($index)">Quitar</button>
+            }
+        </div>
+        <button type="button" (click)="agregarTelefono()">+ Agregar Telefono</button>
+    </div>
+    <div class="formGroup"> 
+        <button type="submit" [disabled]="usuarioForm.invalid">Registrar Usuario</button>
+    </div>
+</form>

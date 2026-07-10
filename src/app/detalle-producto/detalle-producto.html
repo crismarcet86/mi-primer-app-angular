@@ -1,0 +1,10 @@
+<main>
+    <div class="formGroup">
+        @if (cargando()) {
+            <p>Cargando...</p>
+        } @else if (producto()) {
+            <p>{{ producto()!.title }}</p>
+            <p>${{ producto()!.price }}</p>
+        }
+    </div>
+</main>

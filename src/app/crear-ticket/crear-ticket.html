@@ -1,0 +1,36 @@
+<form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
+    <h1>CREAR TICKET</h1>
+    <div class="formGroup">
+        <label class="form-label">Título </label>
+        <input formControlName="titulo" type="text" />
+        @if (ticketForm.get('titulo')?.invalid && ticketForm.get('titulo')?.touched) {
+        <span class="error">
+            @if (ticketForm.get('titulo')?.hasError('required')) {
+            El título es obligatorio.
+            } @if (ticketForm.get('titulo')?.hasError('minlength')) {
+            El título debe tener al menos 5 caracteres.
+            }
+        </span>
+        }
+    </div>
+    <div class="formGroup">
+        <label class="form-label">Descripción </label>
+        <textarea formControlName="descripcion"></textarea>
+    </div>
+    <div class="formGroup">
+        <label class="form-label">Prioridad </label>
+        <select formControlName="prioridad">
+            <option value="baja">Baja</option>
+            <option value="media">Media</option>
+            <option value="alta">Alta</option>
+        </select>
+    </div>
+    <div class="formGroup">
+        <label class="form-label">Estado </label>
+        <select formControlName="estado">
+            <option value="abierto" selected>Abierto</option>
+            <option value="cerrado">Cerrado</option>
+        </select>
+    </div>
+    <div class="formGroup"><button type="submit" [disabled]="ticketForm.invalid">Crear Ticket</button></div>
+</form>

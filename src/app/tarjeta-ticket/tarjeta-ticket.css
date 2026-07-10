@@ -23,3 +23,16 @@
 .mi-tarjeta.abierto {
   max-width: 500px; /* Ajusta este valor según el tamaño de tu botón */
 }
+
+button[type="button"] {
+  width: 40%;
+  padding: 0.55rem;
+  font-weight: 400;
+  color: #ffffff;
+  background-color: #2e4da9;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 0.5rem;
+}

@@ -1,0 +1,96 @@
+/* Contenedor principal del formulario */
+form {
+  max-width: 550px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Bloques de cada campo */
+.formGroup {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Etiquetas */
+label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 0.5rem;
+}
+
+/* Campos de entrada (inputs) */
+input {
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  color: #1e293b;
+  background-color: #f8fafc;
+  transition: all 0.2s ease-in-out;
+  outline: none;
+}
+
+/* Efecto al enfocar el input */
+input:focus {
+  border-color: #3b82f6;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+}
+
+/* Mensajes de error */
+.error {
+  color: #dc2626;
+  font-size: 0.8rem;
+  margin-top: 0.4rem;
+  font-weight: 500;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+/* Botón de registro */
+button[type="submit"] {
+  width: 100%;
+  padding: 0.85rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #2563eb;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 0.5rem;
+}
+
+/* Efecto Hover en botón activo */
+button[type="submit"]:not(:disabled):hover {
+  background-color: #1d4ed8;
+}
+
+/* Estado del botón cuando el formulario es inválido */
+button[type="submit"]:disabled {
+  background-color: #cbd5e1;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
+button[type="button"] {
+  width: 40%;
+  padding: 0.85rem;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #ffffff;
+  background-color: #2e4da9;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 0.5rem;
+}

@@ -1,0 +1,22 @@
+<main>
+    <div class="formGroup">
+        <input 
+            type="text" 
+            id="txt_param_busqueda" 
+            (input)="onInputBusqueda($event)" 
+            placeholder="Buscar productos..."
+            [disabled]="cargando()"
+        >
+
+        @if (cargando()) {
+            <p>Cargando productos...</p>
+        } @else if (error()) {
+            <p class="error">{{ error() }}</p>
+        } @else {
+            @for (producto of productos(); track producto.id) {
+                <div>{{ producto.title }} — ${{ producto.price }}</div>
+                <div><a [routerLink]="['/productos', producto.id]">Ver detalle</a></div>
+            }
+        }
+    </div>
+</main>

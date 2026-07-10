@@ -1,9 +1,12 @@
-import { Component, signal, computed } from '@angular/core';
+import { Component, signal, computed, inject } from '@angular/core';
 import { TarjetaTicket } from '../tarjeta-ticket/tarjeta-ticket';
+import { Router } from '@angular/router';
+import { TicketService } from '../services/ticket-service';
 
 interface Ticket {
   id: number;
   titulo: string;
+  prioridad: string,
   estado: 'abierto' | 'cerrado';
 }
 
@@ -17,14 +20,12 @@ interface Ticket {
 
 export class DashboardTickets {
 
-  tickets = signal<Ticket[]>( [
-    { id: 1, titulo: 'Ticket #1', estado: 'abierto' },
-    { id: 2, titulo: 'Ticket #2', estado: 'cerrado' },
-    { id: 3, titulo: 'Ticket #3', estado: 'abierto' },
-    { id: 4, titulo: 'Ticket #4', estado: 'cerrado' },
-    { id: 5, titulo: 'Ticket #5', estado: 'abierto' },
-    { id: 6, titulo: 'Ticket #6', estado: 'abierto' },
-  ]);
+  private router = inject(Router);
+  datosTicket: any;
+
+  private ticketService = inject(TicketService);
+
+  tickets = this.ticketService.ticketsSignal;
   filtro = signal<'todos' | 'abierto' | 'cerrado'>('todos');
   contador = signal(0);
 
@@ -46,12 +47,15 @@ export class DashboardTickets {
   );
 
   cambiarEstadoTicket(idTicket: number) {
-    this.tickets.update(ticketsActuales => 
-      ticketsActuales.map(ticket => 
-        ticket.id === idTicket 
-          ? { ...ticket, estado: 'cerrado' }
-          : ticket
-      )
-    );
+    this.ticketService.cambiarEstado(idTicket, 'cerrado');
+  }
+
+  constructor() {
+    const navigation = this.router.getCurrentNavigation();
+    this.datosTicket = navigation?.extras.state?.['data'];
+
+    if (this.datosTicket) {
+      this.ticketService.agregarTicket(this.datosTicket);
+    }
   }
 }
