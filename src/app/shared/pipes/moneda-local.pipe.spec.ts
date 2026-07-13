@@ -26,9 +26,8 @@ describe('MonedaLocalPipe', () => {
     expect(resultado).toBe('USD100.00');
   });
 
-  // Test 4: Probar los casos nulos o indefinidos (el error TS2345 que tenías)
-  it('debe manejar correctamente valores null o undefined', () => {
-    expect(pipe.transform(0)).toBe('$0.00');
+  // Test 4: Probar los casos 0 (el error TS2345 que tenías)
+  it('debe manejar el valor cero correctamente', () => {
     expect(pipe.transform(0)).toBe('$0.00');
   });
 });

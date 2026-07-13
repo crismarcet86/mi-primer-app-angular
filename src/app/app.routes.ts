@@ -10,9 +10,6 @@ export const routes: Routes = [
   { path: 'nuevo-ticket', 
     loadComponent: () => import('./features/crear-ticket/crear-ticket').then(m => m.CrearTicket) 
   },
-  { path: 'nuevo-usuario', 
-    loadComponent: () => import('./features/registro-usuario/registro-usuario').then(m => m.RegistroUsuario) 
-  },
   { path: 'lista-productos', 
     loadComponent: () => import('./features/lista-productos/lista-productos').then(m => m.ListaProductos) 
   },

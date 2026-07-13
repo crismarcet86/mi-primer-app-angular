@@ -120,3 +120,15 @@ select {
 h1 {
     position: center;
 }
+
+@media (max-width: 600px) {
+  main {
+    max-width: 100%;
+    margin: 1rem;
+    padding: 1.25rem;
+  }
+  .nav-links {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}

@@ -198,23 +198,14 @@
     </clipPath>
   </defs>
 </svg>
+
 <nav class="navbar">
-  <div class="logo">
-    <h1>{{ nombreApp }}</h1>
-  </div>
   <ul class="nav-links">
-    <li>
-      <a routerLink="/" routerLinkActive="activo">Dashboard</a>
-    </li>
-    <li>
-      <a routerLink="nuevo-ticket">Crear Ticket</a>
-    </li>
-    <li>
-      <a routerLink="nuevo-usuario">Nuevo Usuario</a>
-    </li>
-    <li>
-      <a routerLink="lista-productos">Lista de Productos</a>
-    </li>
+    <h1>{{ nombreApp }}</h1>
+    <li><a routerLink="/" routerLinkActive="activo">Dashboard Tickets</a></li>
+    <li><a routerLink="/nuevo-ticket" routerLinkActive="activo">Nuevo Ticket</a></li>
+    <li><a routerLink="/lista-productos" routerLinkActive="activo">Productos</a></li>
   </ul>
 </nav>
+
 <router-outlet />
