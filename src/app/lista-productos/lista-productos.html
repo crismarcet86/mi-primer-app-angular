@@ -13,7 +13,7 @@
         } @else if (error()) {
             <p class="error">{{ error() }}</p>
         } @else {
-            @for (producto of productos(); track producto.id) {
+            @for (producto of productosFiltrados(); track producto.id) {
                 <div>{{ producto.title }} — ${{ producto.price }}</div>
                 <div><a [routerLink]="['/productos', producto.id]">Ver detalle</a></div>
             }
