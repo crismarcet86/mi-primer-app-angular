@@ -6,7 +6,7 @@
     </p>
     <ul>
         @for (ticket of ticketsMostrados(); track ticket.id) {
-        <app-tarjeta-ticket [id]="ticket.id" [titulo]="ticket.titulo" [estado]="ticket.estado"
+        <app-tarjeta-ticket appResaltar [id]="ticket.id" [titulo]="ticket.titulo" [estado]="ticket.estado"
             (cerrar)="cambiarEstadoTicket($event)" />
         }
     </ul>

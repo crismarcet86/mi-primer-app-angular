@@ -1,12 +1,13 @@
 import { Component, signal, computed, inject } from '@angular/core';
 import { TarjetaTicket } from '../tarjeta-ticket/tarjeta-ticket';
 import { Router } from '@angular/router';
-import { TicketService, Ticket  } from '../services/ticket-service';
+import { TicketService  } from '../../core/services/ticket-service';
+import { ResaltarDirective } from '../../shared/directives/resaltar.directive';
 
 @Component({
   selector: 'app-dashboard-tickets',
   standalone: true,
-  imports: [TarjetaTicket],
+  imports: [ TarjetaTicket, ResaltarDirective ],
   templateUrl: './dashboard-tickets.html',
   styleUrl: './dashboard-tickets.css',
 })

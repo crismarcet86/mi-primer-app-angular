@@ -2,12 +2,14 @@ import { Component, inject, signal, effect } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
-import { ProductoService, Producto } from '../services/producto-service';
+import { ProductoService, Producto } from '../../core/services/producto-service';
+import { MonedaLocalPipe } from '../../shared/pipes/moneda-local.pipe';
+import { ResaltarDirective } from '../../shared/directives/resaltar.directive';
 
 @Component({
   selector: 'app-detalle-producto',
   standalone: true,
-  imports: [],
+  imports: [ MonedaLocalPipe, ResaltarDirective ],
   templateUrl: './detalle-producto.html',
   styleUrl: './detalle-producto.css',
 })

@@ -7,14 +7,15 @@
             placeholder="Buscar productos..."
             [disabled]="cargando()"
         >
-
         @if (cargando()) {
             <p>Cargando productos...</p>
         } @else if (error()) {
             <p class="error">{{ error() }}</p>
         } @else {
             @for (producto of productosFiltrados(); track producto.id) {
-                <div>{{ producto.title }} — ${{ producto.price }}</div>
+                <div appResaltar>{{ producto.title }}
+                    <p>{{ producto.price | monedaLocal : '$' }}</p>
+                </div> 
                 <div><a [routerLink]="['/productos', producto.id]">Ver detalle</a></div>
             }
         }

@@ -1,0 +1,12 @@
+<main>
+    <div class="formGroup">
+        @if (cargando()) {
+            <p>Cargando...</p>
+        } @else if (producto()) {
+            <div appResaltar>
+                <p>{{ producto()!.title }}</p>
+                <p>{{ producto()?.price ?? 0| monedaLocal : '$' }}</p>
+            </div>
+        }
+    </div>
+</main>

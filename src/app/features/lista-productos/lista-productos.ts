@@ -1,13 +1,15 @@
 import { Component, OnInit, inject, signal, computed } from '@angular/core';
-import { ProductoService, Producto } from '../services/producto-service';
+import { ProductoService } from '../../core/services/producto-service';
 import { RouterLink } from "@angular/router";
 import { Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { MonedaLocalPipe } from '../../shared/pipes/moneda-local.pipe';
+import { ResaltarDirective } from '../../shared/directives/resaltar.directive';
 
 @Component({
   selector: 'app-lista-productos',
   standalone: true,
-  imports:  [ RouterLink ],
+  imports:  [ RouterLink, MonedaLocalPipe, ResaltarDirective ],
   templateUrl: './lista-productos.html',
   styleUrl: './lista-productos.css',
 })
@@ -22,7 +24,6 @@ export class ListaProductos implements OnInit {
   
   terminoBusqueda = signal<string>('');
   private busquedaInput = new Subject<string>();
-  // private debounceTimer?: any;
 
   productosFiltrados = computed(() => {
     const productosOriginales = this.productoService.productos();
@@ -53,15 +54,4 @@ export class ListaProductos implements OnInit {
     this.busquedaInput.next(input.value);
   }
 
-  // onInputBusqueda(evento: Event) {
-  //   const input = evento.target as HTMLInputElement;
-    
-  //   // Limpiamos el timer anterior si el usuario sigue escribiendo rápido
-  //   if (this.debounceTimer) clearTimeout(this.debounceTimer);
-
-  //   // Esperamos 300ms antes de aplicar el filtro en memoria
-  //   this.debounceTimer = setTimeout(() => {
-  //     this.terminoBusqueda.set(input.value);
-  //   }, 300);
-  // }
 }
