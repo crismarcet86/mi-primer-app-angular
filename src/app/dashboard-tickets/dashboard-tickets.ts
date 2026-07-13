@@ -1,14 +1,7 @@
 import { Component, signal, computed, inject } from '@angular/core';
 import { TarjetaTicket } from '../tarjeta-ticket/tarjeta-ticket';
 import { Router } from '@angular/router';
-import { TicketService } from '../services/ticket-service';
-
-interface Ticket {
-  id: number;
-  titulo: string;
-  prioridad: string,
-  estado: 'abierto' | 'cerrado';
-}
+import { TicketService, Ticket  } from '../services/ticket-service';
 
 @Component({
   selector: 'app-dashboard-tickets',

@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 
-interface Ticket {
+export interface Ticket {
   id: number;
   titulo: string;
   prioridad: string;

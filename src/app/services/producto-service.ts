@@ -20,8 +20,6 @@ export class ProductoService {
   cargandoSignal = this.cargando.asReadonly();
   errorSignal = this.error.asReadonly();
 
-  productoSeleccionado = signal<Producto | null>(null);
-
   cargarProductos() {
     this.cargando.set(true);
     this.error.set(null);

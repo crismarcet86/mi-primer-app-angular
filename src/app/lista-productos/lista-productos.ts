@@ -21,7 +21,8 @@ export class ListaProductos implements OnInit {
   error = this.productoService.error;
   
   terminoBusqueda = signal<string>('');
-  private debounceTimer?: any;
+  private busquedaInput = new Subject<string>();
+  // private debounceTimer?: any;
 
   productosFiltrados = computed(() => {
     const productosOriginales = this.productoService.productos();
@@ -40,15 +41,27 @@ export class ListaProductos implements OnInit {
     this.productoService.cargarProductos();
   }
 
+  constructor() {
+    this.busquedaInput.pipe(
+      debounceTime(300),
+      distinctUntilChanged()
+    ).subscribe(texto => this.terminoBusqueda.set(texto));
+  }
+
   onInputBusqueda(evento: Event) {
     const input = evento.target as HTMLInputElement;
-    
-    // Limpiamos el timer anterior si el usuario sigue escribiendo rápido
-    if (this.debounceTimer) clearTimeout(this.debounceTimer);
-
-    // Esperamos 300ms antes de aplicar el filtro en memoria
-    this.debounceTimer = setTimeout(() => {
-      this.terminoBusqueda.set(input.value);
-    }, 300);
+    this.busquedaInput.next(input.value);
   }
+
+  // onInputBusqueda(evento: Event) {
+  //   const input = evento.target as HTMLInputElement;
+    
+  //   // Limpiamos el timer anterior si el usuario sigue escribiendo rápido
+  //   if (this.debounceTimer) clearTimeout(this.debounceTimer);
+
+  //   // Esperamos 300ms antes de aplicar el filtro en memoria
+  //   this.debounceTimer = setTimeout(() => {
+  //     this.terminoBusqueda.set(input.value);
+  //   }, 300);
+  // }
 }
