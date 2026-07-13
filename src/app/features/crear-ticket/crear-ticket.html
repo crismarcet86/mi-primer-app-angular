@@ -1,36 +1,48 @@
-<form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
-    <h1>CREAR TICKET</h1>
-    <div class="formGroup">
-        <label class="form-label">Título </label>
-        <input formControlName="titulo" type="text" />
-        @if (ticketForm.get('titulo')?.invalid && ticketForm.get('titulo')?.touched) {
-        <span class="error">
-            @if (ticketForm.get('titulo')?.hasError('required')) {
-            El título es obligatorio.
-            } @if (ticketForm.get('titulo')?.hasError('minlength')) {
-            El título debe tener al menos 5 caracteres.
-            }
-        </span>
-        }
+<div class="ticket-card">
+  <h2>Crear Nuevo Ticket</h2>
+
+  <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()" class="ticket-form">
+    
+    <!-- Campo: Título -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Título</mat-label>
+      <input matInput formControlName="titulo" placeholder="Ej. Falla en el servidor" />
+      @if (ticketForm.get('titulo')?.hasError('required') && ticketForm.get('titulo')?.touched) {
+        <mat-error>El título es obligatorio.</mat-error>
+      }
+      @if (ticketForm.get('titulo')?.hasError('minlength') && ticketForm.get('titulo')?.touched) {
+        <mat-error>Debe tener al menos 5 caracteres.</mat-error>
+      }
+    </mat-form-field>
+
+    <!-- Campo: Descripción -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Descripción</mat-label>
+      <textarea matInput formControlName="descripcion" rows="4" placeholder="Detalla el problema aquí..."></textarea>
+      @if (ticketForm.get('descripcion')?.hasError('required') && ticketForm.get('descripcion')?.touched) {
+        <mat-error>La descripción es obligatoria.</mat-error>
+      }
+      @if (ticketForm.get('descripcion')?.hasError('minlength') && ticketForm.get('descripcion')?.touched) {
+        <mat-error>Debe tener al menos 10 caracteres.</mat-error>
+      }
+    </mat-form-field>
+
+    <!-- Campo: Prioridad -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Prioridad</mat-label>
+      <mat-select formControlName="prioridad">
+        <mat-option value="baja">Baja</mat-option>
+        <mat-option value="media">Media</mat-option>
+        <mat-option value="alta">Alta</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Botón de Enviar -->
+    <div class="form-actions">
+      <button mat-flat-button color="primary" type="submit" [disabled]="ticketForm.invalid">
+        Crear Ticket
+      </button>
     </div>
-    <div class="formGroup">
-        <label class="form-label">Descripción </label>
-        <textarea formControlName="descripcion"></textarea>
-    </div>
-    <div class="formGroup">
-        <label class="form-label">Prioridad </label>
-        <select formControlName="prioridad">
-            <option value="baja">Baja</option>
-            <option value="media">Media</option>
-            <option value="alta">Alta</option>
-        </select>
-    </div>
-    <div class="formGroup">
-        <label class="form-label">Estado </label>
-        <select formControlName="estado">
-            <option value="abierto" selected>Abierto</option>
-            <option value="cerrado">Cerrado</option>
-        </select>
-    </div>
-    <div class="formGroup"><button type="submit" [disabled]="ticketForm.invalid">Crear Ticket</button></div>
-</form>
+
+  </form>
+</div>
