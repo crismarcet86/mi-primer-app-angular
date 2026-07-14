@@ -199,13 +199,31 @@
   </defs>
 </svg>
 
-<nav class="navbar">
-  <ul class="nav-links">
-    <h1>{{ nombreApp }}</h1>
-    <li><a routerLink="/" routerLinkActive="activo">Dashboard Tickets</a></li>
-    <li><a routerLink="/nuevo-ticket" routerLinkActive="activo">Nuevo Ticket</a></li>
-    <li><a routerLink="/lista-productos" routerLinkActive="activo">Productos</a></li>
-  </ul>
-</nav>
+<mat-toolbar color="primary" class="navbar">
+  <h1>{{ nombreApp }}</h1>
+  
+  <span class="spacer"></span>
+
+  <!-- Botón que activa el menú desplegable -->
+  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Abrir menú de navegación">
+    <mat-icon>menu</mat-icon>
+  </button>
+
+  <!-- Estructura del menú desplegable -->
+  <mat-menu #menu="matMenu">
+    <a mat-menu-item routerLink="/" routerLinkActive="activo" [routerLinkActiveOptions]="{exact: true}">
+      <mat-icon>dashboard</mat-icon>
+      <span>Dashboard Tickets</span>
+    </a>
+    <a mat-menu-item routerLink="/nuevo-ticket" routerLinkActive="activo">
+      <mat-icon>add_circle</mat-icon>
+      <span>Nuevo Ticket</span>
+    </a>
+    <a mat-menu-item routerLink="/lista-productos" routerLinkActive="activo">
+      <mat-icon>inventory_2</mat-icon>
+      <span>Productos</span>
+    </a>
+  </mat-menu>
+</mat-toolbar>
 
 <router-outlet />

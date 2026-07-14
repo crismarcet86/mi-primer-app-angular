@@ -23,9 +23,9 @@
             <ng-container matColumnDef="acciones">
                 <th mat-header-cell *matHeaderCellDef></th>
                 <td mat-cell *matCellDef="let ticket">
-                <button mat-icon-button (click)="cambiarEstadoTicket(ticket.id)">
-                    <mat-icon>check_circle</mat-icon>
-                </button>
+                    @if (ticket.estado === 'abierto') {
+                        <button mat-icon-button (click)="confirmarCierre(ticket.id)">Cerrar</button>
+                    }
                 </td>
             </ng-container>
 

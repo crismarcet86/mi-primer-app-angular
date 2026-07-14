@@ -5,6 +5,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmarDialog } from '../confirmar-dialog/confirmar-dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-dashboard-tickets',
@@ -17,14 +18,15 @@ import { ConfirmarDialog } from '../confirmar-dialog/confirmar-dialog';
 export class DashboardTickets {
 
   private router = inject(Router);
-  datosTicket: any;
-
   private ticketService = inject(TicketService);
   private dialog = inject(MatDialog);
+  private snackBar = inject(MatSnackBar);
 
+  datosTicket: any;
   tickets = this.ticketService.ticketsSignal;
   filtro = signal<'todos' | 'abierto' | 'cerrado'>('todos');
   contador = signal(0);
+  columnasVisibles = ['titulo', 'prioridad', 'estado', 'acciones'];
 
   ticketsMostrados = computed(() => {
     if (this.filtro() === 'todos') return this.tickets();
@@ -52,11 +54,10 @@ export class DashboardTickets {
     ref.afterClosed().subscribe(confirmado => {
       if (confirmado) {
         this.cambiarEstadoTicket(idTicket);
+        this.snackBar.open('Ticket cerrado con éxito', 'Cerrar', { duration: 3000 });
       }
     });
   }
-
-  columnasVisibles = ['titulo', 'prioridad', 'estado', 'acciones'];
 
   constructor() {
     const navigation = this.router.getCurrentNavigation();
