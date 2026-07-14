@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmarDialog } from '../confirmar-dialog/confirmar-dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '../../core/services/auth-service';
 
 @Component({
   selector: 'app-dashboard-tickets',
@@ -21,12 +22,13 @@ export class DashboardTickets {
   private ticketService = inject(TicketService);
   private dialog = inject(MatDialog);
   private snackBar = inject(MatSnackBar);
+  auth = inject(AuthService);
 
   datosTicket: any;
   tickets = this.ticketService.ticketsSignal;
   filtro = signal<'todos' | 'abierto' | 'cerrado'>('todos');
   contador = signal(0);
-  columnasVisibles = ['titulo', 'prioridad', 'estado', 'acciones'];
+  columnasVisibles = ['id', 'titulo', 'prioridad', 'estado', 'acciones'];
 
   ticketsMostrados = computed(() => {
     if (this.filtro() === 'todos') return this.tickets();

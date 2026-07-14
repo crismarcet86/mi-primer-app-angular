@@ -1,0 +1,84 @@
+<div class="login-container">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <mat-card-title>Iniciar Sesión</mat-card-title>
+      <mat-card-subtitle>Ingresa tus credenciales para acceder</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <!-- Formulario de Angular -->
+      <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+        
+        <!-- Campo Usuario -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Usuario</mat-label>
+          <input 
+            matInput
+            type="text" 
+            name="username" 
+            ngModel 
+            required 
+            #usernamelInput="ngModel"
+            placeholder="cmarcet"
+          />
+          <mat-icon matSuffix>username</mat-icon>
+          @if (usernamelInput.invalid && usernamelInput.touched) {
+            <mat-error>El usuario es obligatorio (mín. 3 caracteres).</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Campo Contraseña -->
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Contraseña</mat-label>
+          <input 
+            matInput
+            [type]="ocultarPassword() ? 'password' : 'text'" 
+            name="password" 
+            ngModel 
+            required 
+            minlength="4"
+            #passwordInput="ngModel"
+            placeholder="••••••••"
+          />
+          <button 
+            mat-icon-button 
+            matSuffix 
+            type="button"
+            (click)="ocultarPassword.set(!ocultarPassword())"
+            [attr.aria-label]="'Ocultar contraseña'"
+            [attr.aria-pressed]="ocultarPassword()"
+          >
+            <mat-icon>{{ ocultarPassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          @if (passwordInput.invalid && passwordInput.touched) {
+            <mat-error>La contraseña es obligatoria (mín. 4 caracteres).</mat-error>
+          }
+        </mat-form-field>
+
+        <!-- Mensaje de error de la API -->
+        @if (errorMessage()) {
+          <div class="api-error-message">
+            <mat-icon>error</mat-icon>
+            <span>{{ errorMessage() }}</span>
+          </div>
+        }
+
+        <!-- Botón de Envío -->
+        <button 
+          mat-raised-button 
+          color="primary" 
+          type="submit" 
+          class="full-width btn-submit"
+          [disabled]="loginForm.invalid || isLoading()"
+        >
+          @if (isLoading()) {
+            <mat-spinner diameter="24"></mat-spinner>
+          } @else {
+            <span>Entrar</span>
+          }
+        </button>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
