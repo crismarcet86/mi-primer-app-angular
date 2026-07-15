@@ -20,7 +20,6 @@ export class TicketService {
     { id: 4, titulo: 'Ticket #4', prioridad: 'baja', estado: 'cerrado' },
     { id: 5, titulo: 'Ticket #5', prioridad: 'baja', estado: 'abierto' },
     { id: 6, titulo: 'Ticket #6', prioridad: 'baja', estado: 'abierto' },
-    // ...
   ]);
 
   // Exponemos el signal como solo-lectura hacia afuera

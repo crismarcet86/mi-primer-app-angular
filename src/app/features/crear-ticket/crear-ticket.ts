@@ -9,7 +9,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-crear-ticket',
   standalone: true,
-  imports: [ReactiveFormsModule,MatFormFieldModule,MatInputModule,MatSelectModule],
+  imports: [
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule
+  ],
   templateUrl: './crear-ticket.html',
   styleUrl: './crear-ticket.css',
 })

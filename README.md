@@ -39,4 +39,5 @@ src/app/
 \`\`\`
 
 ## Aprendizajes clave
-(2-3 líneas sobre qué se te hizo más difícil o interesante — esto le da personalidad al README)
+cuando la aplicación alcanza un nivel crítico de complejidad, concurrencia y auditoría
+los Signals son perfectos para flujos locales, reactividad directa y estados compartidos de tamaño medio, un enfoque basado puramente en servicios con Signals se vuelve insostenible en escenarios de sincronizacion masiva o multiples equipos

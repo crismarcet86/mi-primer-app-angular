@@ -15,7 +15,7 @@ main {
 }
 
 button[type="button"] {
-  width: 25%;
+  width: 20%;
   padding: 0.55rem;
   font-weight: 400;
   color: #ffffff;
@@ -24,7 +24,6 @@ button[type="button"] {
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.2s ease;
-  margin-top: 0.5rem;
 }
 
 @media (max-width: 600px) {
@@ -37,4 +36,10 @@ button[type="button"] {
     flex-direction: column;
     gap: 0.5rem;
   }
+}
+
+.contenedor-filtros {
+    display: flex;       /* Los alinea en fila horizontal */
+    gap: 12px;          /* Añade espacio de 12px entre cada botón */
+    margin-top: 16px;   /* Separa los botones de la tabla de arriba */
 }

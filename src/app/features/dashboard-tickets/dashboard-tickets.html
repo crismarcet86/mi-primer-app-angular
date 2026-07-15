@@ -41,10 +41,24 @@
             <tr mat-header-row *matHeaderRowDef="columnasVisibles"></tr>
             <tr mat-row *matRowDef="let row; columns: columnasVisibles;"></tr>
         </table>
-        <button type="button" (click)="this.filtro.set('todos')">Mostrar Todos</button>
-        <button type="button" (click)="this.filtro.set('abierto')">Mostrar solo Abiertos</button>
-        <button type="button" (click)="this.filtro.set('cerrado')">Mostrar solo Cerrados</button>
-        <p>{{ contador() }}</p>
-        <button type="button" (click)="contador.update(v => v + 1)">+1</button>
+        <div style="display: flex; gap: 12px; margin-top: 16px;">
+            @if (ticketStore.filtro() === 'todos') {
+                <button mat-flat-button color="primary" (click)="ticketStore.setFiltro('todos')">Mostrar Todos</button>
+            } @else {
+                <button mat-stroked-button color="primary" (click)="ticketStore.setFiltro('todos')">Mostrar Todos</button>
+            }
+            @if (ticketStore.filtro() === 'abierto') {
+                <button mat-flat-button color="accent" (click)="ticketStore.setFiltro('abierto')">Mostrar solo Abiertos</button>
+            } @else {
+                <button mat-stroked-button color="accent" (click)="ticketStore.setFiltro('abierto')">Mostrar solo Abiertos</button>
+            }
+            @if (ticketStore.filtro() === 'cerrado') {
+                <button mat-flat-button color="warn" (click)="ticketStore.setFiltro('cerrado')">Mostrar solo Cerrados</button>
+            } @else {
+                <button mat-stroked-button color="warn" (click)="ticketStore.setFiltro('cerrado')">Mostrar solo Cerrados</button>
+            }
+        </div>
+        <!-- <p>{{ contador() }}</p>
+        <button type="button" (click)="contador.update(v => v + 1)">+1</button> -->
     </div>
 </main>
