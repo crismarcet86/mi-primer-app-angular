@@ -1,10 +1,11 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 export interface Producto {
   id: number;
-  title: string;
-  price: number;
+  nombre: string;
+  precio: number;
 }
 
 @Injectable({ providedIn: 'root' })
@@ -12,6 +13,8 @@ export interface Producto {
 export class ProductoService {
 
   private http = inject(HttpClient);
+  private apiUrl = `${environment.apiUrl}/productos`;
+
   productos = signal<Producto[]>([]);
   cargando = signal(false);
   error = signal<string | null>(null);
@@ -24,7 +27,7 @@ export class ProductoService {
     this.cargando.set(true);
     this.error.set(null);
 
-    this.http.get<Producto[]>('https://fakestoreapi.com/products').subscribe({
+    this.http.get<Producto[]>(this.apiUrl).subscribe({
       next: (data) => {
         this.productos.set(data);
         this.cargando.set(false);
@@ -37,7 +40,7 @@ export class ProductoService {
   }
 
   obtenerPorId(id: string) {
-    return this.http.get<Producto>(`https://fakestoreapi.com/products/${id}`);
+    return this.http.get<Producto>(`${this.apiUrl}/${id}`);
   };
 
 }

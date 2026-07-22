@@ -4,8 +4,8 @@
             <p>Cargando...</p>
         } @else if (producto()) {
             <div appResaltar>
-                <p>{{ producto()!.title }}</p>
-                <p>{{ (producto()?.price ?? 0) | monedaLocal : '$' }}</p>
+                <p>{{ producto()!.nombre }}</p>
+                <p>{{ (producto()?.precio ?? 0) | monedaLocal : '$' }}</p>
             </div>
         }
     </div>

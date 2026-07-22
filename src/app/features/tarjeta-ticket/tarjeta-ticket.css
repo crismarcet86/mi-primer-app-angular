@@ -15,12 +15,12 @@
 }
 
 /* Estado Cerrado: Más angosto */
-.mi-tarjeta.cerrado {
+.mi-tarjeta.Cerrado {
   max-width: 200px; 
 }
 
 /* Estado Abierto: Se amplía a la derecha para dar espacio al botón */
-.mi-tarjeta.abierto {
+.mi-tarjeta.Abierto {
   max-width: 500px; /* Ajusta este valor según el tamaño de tu botón */
 }
 

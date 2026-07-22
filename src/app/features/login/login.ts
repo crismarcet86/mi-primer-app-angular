@@ -43,11 +43,11 @@ export class Login {
     this.isLoading.set(true);
     this.errorMessage.set(null);
 
-    const { username, password } = form.value;
+    const { email, password } = form.value;
 
-    this.authService.login(username, password).subscribe({
+    this.authService.login(email, password).subscribe({
       next: (response) => {
-        this.authService.guardarSesion(username, response.accessToken); // antes era response.token
+        this.authService.guardarSesion(email, response.token); // antes era response.token
         this.isLoading.set(false);
         this.router.navigate(['/']); // ojo: tenías '/dashboard', tu ruta real es '/'
       },

@@ -1,7 +1,7 @@
 interface Ticket {
     id: number;
     titulo: string;
-    estado: 'abierto' | 'cerrado';
+    estado: 'Abierto' | 'Cerrado';
 }
 
 class GestorTicket {
@@ -15,21 +15,21 @@ class GestorTicket {
         const ticketEncontrado = this.tickets.find(ticket => ticket.id === id);
 
         if(ticketEncontrado){
-            ticketEncontrado.estado = 'cerrado';
+            ticketEncontrado.estado = 'Cerrado';
             return true;
         }
         return false;
     }
 
     buscarTodosDisponibles(): Ticket[] {
-        return this.tickets.filter(tic => tic.estado === 'abierto');
+        return this.tickets.filter(tic => tic.estado === 'Abierto');
     }
 
-    contarPorEstado(): { abiertos: number; cerrados: number;}{ 
+    contarPorEstado(): { Abiertos: number; Cerrados: number;}{ 
 
-        const abiertos = this.tickets.filter(t => t.estado === 'abierto').length;
-        const cerrados = this.tickets.filter(t => t.estado === 'cerrado').length;
+        const Abiertos = this.tickets.filter(t => t.estado === 'Abierto').length;
+        const Cerrados = this.tickets.filter(t => t.estado === 'Cerrado').length;
 
-        return { abiertos, cerrados };
+        return { Abiertos, Cerrados };
     }
 }

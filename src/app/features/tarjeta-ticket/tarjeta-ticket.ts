@@ -14,7 +14,7 @@ export class TarjetaTicket {
 
   id = input.required<number>();
   titulo = input.required<string>();
-  estado = input.required<'abierto' | 'cerrado'>();
+  estado = input.required<'Abierto' | 'Cerrado'>();
   
   cerrar = output<number>(); // evento que este componente puede emitir
 

@@ -15,11 +15,6 @@
                 <td mat-cell *matCellDef="let ticket">{{ ticket.titulo }}</td>
             </ng-container>
 
-            <ng-container matColumnDef="prioridad">
-                <th mat-header-cell *matHeaderCellDef>Prioridad</th>
-                <td mat-cell *matCellDef="let ticket">{{ ticket.prioridad }}</td>
-            </ng-container>
-
             <ng-container matColumnDef="estado">
                 <th mat-header-cell *matHeaderCellDef>Estado</th>
                 <td mat-cell *matCellDef="let ticket">{{ ticket.estado }}</td>
@@ -28,7 +23,7 @@
             <ng-container matColumnDef="acciones">
                 <th mat-header-cell *matHeaderCellDef></th>
                     <td mat-cell *matCellDef="let ticket">
-                        @if (ticket.estado === 'abierto') {
+                        @if (ticket.estado === 'Abierto') {
                             @if (auth.estaAutenticado()){
                                 <button mat-icon-button (click)="confirmarCierre(ticket.id)" matTooltip="Cerrar ticket">
                                     <mat-icon>check_circle</mat-icon>
@@ -47,18 +42,16 @@
             } @else {
                 <button mat-stroked-button color="primary" (click)="ticketStore.setFiltro('todos')">Mostrar Todos</button>
             }
-            @if (ticketStore.filtro() === 'abierto') {
-                <button mat-flat-button color="accent" (click)="ticketStore.setFiltro('abierto')">Mostrar solo Abiertos</button>
+            @if (ticketStore.filtro() === 'Abierto') {
+                <button mat-flat-button color="accent" (click)="ticketStore.setFiltro('Abierto')">Mostrar solo Abiertos</button>
             } @else {
-                <button mat-stroked-button color="accent" (click)="ticketStore.setFiltro('abierto')">Mostrar solo Abiertos</button>
+                <button mat-stroked-button color="accent" (click)="ticketStore.setFiltro('Abierto')">Mostrar solo Abiertos</button>
             }
-            @if (ticketStore.filtro() === 'cerrado') {
-                <button mat-flat-button color="warn" (click)="ticketStore.setFiltro('cerrado')">Mostrar solo Cerrados</button>
+            @if (ticketStore.filtro() === 'Cerrado') {
+                <button mat-flat-button color="warn" (click)="ticketStore.setFiltro('Cerrado')">Mostrar solo Cerrados</button>
             } @else {
-                <button mat-stroked-button color="warn" (click)="ticketStore.setFiltro('cerrado')">Mostrar solo Cerrados</button>
+                <button mat-stroked-button color="warn" (click)="ticketStore.setFiltro('Cerrado')">Mostrar solo Cerrados</button>
             }
         </div>
-        <!-- <p>{{ contador() }}</p>
-        <button type="button" (click)="contador.update(v => v + 1)">+1</button> -->
     </div>
 </main>

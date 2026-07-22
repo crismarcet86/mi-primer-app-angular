@@ -4,7 +4,7 @@ export interface Ticket {
   id: number;
   titulo: string;
   prioridad: string;
-  estado: 'abierto' | 'cerrado';
+  estado: 'Abierto' | 'Cerrado';
 }
 
 @Injectable({
@@ -13,14 +13,7 @@ export interface Ticket {
 
 export class TicketService {
   
-  private tickets = signal<Ticket[]>([
-    { id: 1, titulo: 'Ticket #1', prioridad: 'alta', estado: 'abierto' },
-    { id: 2, titulo: 'Ticket #2', prioridad: 'media', estado: 'cerrado' },
-    { id: 3, titulo: 'Ticket #3', prioridad: 'media', estado: 'abierto' },
-    { id: 4, titulo: 'Ticket #4', prioridad: 'baja', estado: 'cerrado' },
-    { id: 5, titulo: 'Ticket #5', prioridad: 'baja', estado: 'abierto' },
-    { id: 6, titulo: 'Ticket #6', prioridad: 'baja', estado: 'abierto' },
-  ]);
+  private tickets = signal<Ticket[]>([]);
 
   // Exponemos el signal como solo-lectura hacia afuera
   ticketsSignal = this.tickets.asReadonly();
@@ -29,7 +22,7 @@ export class TicketService {
     this.tickets.update(actuales => [...actuales, ticket]);
   }
 
-  cambiarEstado(id: number, nuevoEstado: 'abierto' | 'cerrado') {
+  cambiarEstado(id: number, nuevoEstado: 'Abierto' | 'Cerrado') {
     this.tickets.update(actuales =>
       actuales.map(t => t.id === id ? { ...t, estado: nuevoEstado } : t)
     );

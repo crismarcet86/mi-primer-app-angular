@@ -13,8 +13,8 @@
             <p class="error">{{ error() }}</p>
         } @else {
             @for (producto of productosFiltrados(); track producto.id) {
-                <div appResaltar>{{ producto.title }}
-                    <p>{{ producto.price | monedaLocal : '$' }}</p>
+                <div appResaltar>{{ producto.nombre }}
+                    <p>{{ producto.precio | monedaLocal : '$' }}</p>
                 </div> 
                 <div><a [routerLink]="['/productos', producto.id]">Ver detalle</a></div>
             }

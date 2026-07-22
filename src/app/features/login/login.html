@@ -9,21 +9,21 @@
       <!-- Formulario de Angular -->
       <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
         
-        <!-- Campo Usuario -->
+        <!-- Campo Email -->
         <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Usuario</mat-label>
+          <mat-label>Email</mat-label>
           <input 
             matInput
-            type="text" 
-            name="username" 
+            type="email" 
+            name="email" 
             ngModel 
             required 
-            #usernamelInput="ngModel"
-            placeholder="cmarcet"
+            #emmaillInput="ngModel"
+            placeholder="ejemplo@info.com"
           />
-          <mat-icon matSuffix>username</mat-icon>
-          @if (usernamelInput.invalid && usernamelInput.touched) {
-            <mat-error>El usuario es obligatorio (mín. 3 caracteres).</mat-error>
+          <mat-icon matSuffix>email</mat-icon>
+          @if (emmaillInput.invalid && emmaillInput.touched) {
+            <mat-error>El email es obligatorio.</mat-error>
           }
         </mat-form-field>
 

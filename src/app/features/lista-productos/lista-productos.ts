@@ -34,7 +34,7 @@ export class ListaProductos implements OnInit {
     }
 
     return productosOriginales.filter(p => 
-      p.title.toLowerCase().includes(texto)
+      p.nombre.toLowerCase().includes(texto)
     );
   });
 

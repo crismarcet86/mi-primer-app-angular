@@ -5,6 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TicketStore } from '../../core/stores/ticket-store';
 
 @Component({
   selector: 'app-crear-ticket',
@@ -24,22 +25,29 @@ export class CrearTicket {
   private fb = inject(FormBuilder);
   private router = inject(Router);
   private snackBar = inject(MatSnackBar);
+  ticketStore = inject(TicketStore);
 
   ticketForm = this.fb.group({
     titulo: ['', [Validators.required, Validators.minLength(5)]],
-    descripcion: ['', [Validators.required, Validators.minLength(10)]],
-    prioridad: ['media', [Validators.required]],
-    estado: ['abierto', [Validators.required]]
   });
 
   onSubmit() {
     if (this.ticketForm.valid) {
+      
       const nuevoTicket = {
-        id: Date.now(), // solución temporal simple: usa el timestamp como id único
-        ...this.ticketForm.value
+        titulo: this.ticketForm.value.titulo ?? ''
       };
-      this.router.navigate(['/'], { state: { data: nuevoTicket } });
-      this.snackBar.open('Ticket creado con éxito', 'Cerrar', { duration: 3000 });
+
+      this.ticketStore.agregarTicket(nuevoTicket).subscribe({
+        next: (ticketCreado) => {
+          this.router.navigate(['/']);
+          this.snackBar.open('Ticket creado con éxito', 'Cerrar', { duration: 3000 });
+        },
+        error: (err) => {
+          this.snackBar.open('Error al guardar el ticket en el servidor', 'Cerrar', { duration: 3000 });
+          console.error(err);
+        }
+      });
     }
   }
 }

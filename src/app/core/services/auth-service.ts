@@ -2,6 +2,7 @@ import { Injectable, signal, computed, inject, PLATFORM_ID } from '@angular/core
 import { HttpClient } from '@angular/common/http';
 import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 interface Usuario {
   email: string;
@@ -15,18 +16,14 @@ export class AuthService {
   private router = inject(Router);
   // Inyectamos el ID de la plataforma de forma moderna
   private isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
-
   // Inicializa con los datos del navegador o null si está en el servidor
   private usuario = signal<Usuario | null>(this.cargarSesionGuardada());
 
   usuarioActual = this.usuario.asReadonly();
   estaAutenticado = computed(() => this.usuario() !== null);
 
-  login(username: string, password: string) {
-    return this.http.post<{ accessToken: string }>(
-      'https://dummyjson.com/auth/login',
-      { username: username, password } // DummyJSON usa "username", no "email"
-    );
+  login(email: string, password: string) {
+    return this.http.post<{ token: string }>(`${environment.apiUrl}/auth/login`, { email, password });
   }
 
   guardarSesion(email: string, token: string) {

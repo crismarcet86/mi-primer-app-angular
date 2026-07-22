@@ -1,6 +1,6 @@
-<div class="mi-tarjeta" [ngClass]="{ 'abierto': estado() === 'abierto', 'cerrado': estado() === 'cerrado' }">
+<div class="mi-tarjeta" [ngClass]="{ 'Abierto': estado() === 'Abierto', 'Cerrado': estado() === 'Cerrado' }">
   <div class="contenido-tarjeta">
-    @if (estado() === 'abierto') {
+    @if (estado() === 'Abierto') {
       <span>🔴 {{ titulo() }} — {{ estado() }}</span>
       <button type="button" (click)="onCerrarClick(id())">Cerrar Ticket</button>
     } @else {

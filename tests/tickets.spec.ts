@@ -9,9 +9,9 @@ test.describe('Cerrar ticket', () => {
 
   test('cerrar un ticket cambia su estado', async ({ page }) => {
     await page.goto('/');
-    const filaAbierta = page.locator('tr', { hasText: 'abierto' }).first();
+    const filaAbierta = page.locator('tr', { hasText: 'Abierto' }).first();
     await filaAbierta.getByRole('button').click();
     await page.getByRole('button', { name: 'Cerrar Ticket' }).click();
-    await expect(page.getByText('Ticket cerrado con éxito')).toBeVisible();
+    await expect(page.getByText('Ticket Cerrado con éxito')).toBeVisible();
   });
 });

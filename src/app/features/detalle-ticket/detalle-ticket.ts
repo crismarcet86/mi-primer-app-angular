@@ -2,7 +2,6 @@ import { Component, computed, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
-// import { TicketService } from '../../core/services/ticket-service';
 import { TicketStore } from '../../core/stores/ticket-store';
 
 @Component({
@@ -15,7 +14,6 @@ import { TicketStore } from '../../core/stores/ticket-store';
 
 export class DetalleTicket {
   private route = inject(ActivatedRoute);
-  // private ticketService = inject(TicketService);
   private ticketStore = inject(TicketStore);
 
   id = toSignal(

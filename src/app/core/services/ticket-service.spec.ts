@@ -10,9 +10,9 @@ describe('TicketService', () => {
   });
 
   it('debería cambiar el estado de un ticket existente', () => {
-    service.cambiarEstado(1, 'cerrado');
+    service.cambiarEstado(1, 'Cerrado');
     const ticket = service.buscarPorId(1);
-    expect(ticket?.estado).toBe('cerrado');
+    expect(ticket?.estado).toBe('Cerrado');
   });
 
   it('no debería fallar al buscar un id inexistente', () => {
@@ -22,7 +22,7 @@ describe('TicketService', () => {
 
   it('debería agregar un ticket nuevo a la lista', () => {
     const cantidadInicial = service.ticketsSignal().length;
-    service.agregarTicket({ id: 100, titulo: 'Nuevo', prioridad: 'alta', estado: 'abierto' });
+    service.agregarTicket({ id: 100, titulo: 'Nuevo', prioridad: 'alta', estado: 'Abierto' });
     expect(service.ticketsSignal().length).toBe(cantidadInicial + 1);
   });
 });

@@ -19,7 +19,7 @@ test.describe('Verificación del botón Cerrar Ticket', () => {
         await page.goto('/');
 
         // 2. Localizar la primera fila abierta
-        const filaAbierta = page.locator('tr', { hasText: 'abierto' }).first();
+        const filaAbierta = page.locator('tr', { hasText: 'Abierto' }).first();
 
         // 3. Verificar que el botón "Cerrar Ticket" no es visible o no existe
         const botonCerrar = filaAbierta.getByRole('button', { name: 'Cerrar Ticket' });
@@ -32,12 +32,12 @@ test.describe('Verificación del botón Cerrar Ticket', () => {
 
         // 2. Ir al dashboard y ejecutar tu flujo original
         await page.goto('/');
-        const filaAbierta = page.locator('tr', { hasText: 'abierto' }).first();
+        const filaAbierta = page.locator('tr', { hasText: 'Abierto' }).first();
         await filaAbierta.getByRole('button').click();
         await page.getByRole('button', { name: 'Cerrar Ticket' }).click();
         
         // 3. Confirmar la acción exitosa
-        await expect(page.getByText('Ticket cerrado con éxito')).toBeVisible();
+        await expect(page.getByText('Ticket Cerrado con éxito')).toBeVisible();
     });
 
 });
