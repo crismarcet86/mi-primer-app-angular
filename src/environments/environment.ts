@@ -1,3 +1,3 @@
 export const environment = {
-  apiUrl: 'https://tu-api-desplegada.com/api' // placeholder por ahora
+  apiUrl: 'https://ticketapi-dotnet-production.up.railway.app/api'
 };
