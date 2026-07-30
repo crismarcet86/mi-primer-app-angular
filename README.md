@@ -1,9 +1,20 @@
-# Mi Primer App Angular — Gestor de Tickets y Catálogo de Productos
+# Gestor de Tickets y Catálogo de Productos — Proyecto Full-Stack
 
-Proyecto integrador construido durante un plan de estudio autodidacta de Angular (12 semanas),
-partiendo de experiencia previa en PHP/Zend Framework.
+Proyecto integrador construido durante un plan de estudio autodidacta de Angular (12 semanas)
+y C#/ASP.NET Core (8 semanas), partiendo de experiencia previa en PHP/Zend Framework.
 
-Demo en producción: https://mi-primer-app-angular-three.vercel.app/
+## Arquitectura
+
+```
+Angular (Vercel)  →  API ASP.NET Core (Railway)  →  PostgreSQL (Railway)
+     Frontend              Backend                     Base de datos
+```
+
+- **Frontend**: https://mi-primer-app-angular-three.vercel.app/
+- **Backend / API**: https://ticketapi-dotnet-production.up.railway.app/swagger
+
+Ambos servicios están conectados con integración continua: cada push a la rama principal
+de cada repositorio dispara un redeploy automático (Vercel para el frontend, Railway para el backend).
 
 ## Funcionalidades
 
@@ -20,13 +31,20 @@ Demo en producción: https://mi-primer-app-angular-three.vercel.app/
 
 ## Stack técnico
 
+### Frontend
 - Angular 21 (standalone components, signals, control flow moderno, SSR)
 - Angular Material
 - `@ngrx/signals` (Signal Store)
-- TypeScript
-- RxJS
+- TypeScript / RxJS
 - Jasmine/Karma (testing unitario)
 - Playwright (testing E2E)
+
+### Backend
+- C# / ASP.NET Core Web API (.NET 10)
+- Entity Framework Core + PostgreSQL (Npgsql)
+- Autenticación con JWT (tokens propios, contraseñas hasheadas con BCrypt)
+- Swashbuckle (Swagger UI)
+- xUnit + `WebApplicationFactory` (testing de integración con base de datos en memoria)
 
 ## Cómo correr el proyecto
 
@@ -104,8 +122,22 @@ tests/                    # Tests E2E con Playwright (fuera de src/, no se compi
   (`isPlatformBrowser`).
 - Los tests E2E viven fuera del árbol de la aplicación (`tests/`, no `src/app/`) porque prueban la app
   desde afuera, como lo haría un usuario real, y nunca deben mezclarse con los tests unitarios de Angular.
+- En ASP.NET Core, los parámetros de tipos simples (`int`, `enum`, `string`) se leen por defecto de la
+  query string o la ruta, no del cuerpo de la petición — hace falta `[FromBody]` explícito para que
+  coincidan con lo que envía un cliente como Angular vía `HttpClient`.
+- Los tests de integración (`WebApplicationFactory`) nunca deben tocar la base de datos real: se
+  reemplaza el proveedor de EF Core por uno en memoria (o se activa un entorno `"Testing"` dedicado)
+  para que cada corrida empiece con datos limpios y aislados.
+- CORS se configura por **origen** (protocolo + dominio + puerto de quien consume la API), nunca por
+  la URL de la propia API ni con rutas incluidas — y hay que distinguir entre URLs de *preview* y de
+  *producción* al autorizar un frontend desplegado.
 
 ## Despliegue
 
-El proyecto está conectado a Vercel con integración continua desde GitHub: cada push a la rama principal
-dispara un nuevo deploy automáticamente.
+- **Frontend**: conectado a Vercel con integración continua desde GitHub — cada push a la rama
+  principal dispara un redeploy automático.
+- **Backend**: conectado a Railway con integración continua desde GitHub — cada push redespliega la
+  API y aplica las migraciones de base de datos automáticamente al arrancar (`db.Database.Migrate()`
+  en `Program.cs`).
+- Variables sensibles (cadena de conexión a PostgreSQL, clave JWT) se gestionan como variables de
+  entorno en Railway, nunca committeadas al repositorio.
